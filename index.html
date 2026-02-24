@@ -420,6 +420,151 @@
                 <p style="margin-top: 20px; font-size: 14px; color: #666;">
                     <strong>Response Time:</strong> Critical issues 2-4 hours • Major issues 24 hours • All feedback acknowledged within 48 hours
                 </p>
+                
+                <div style="margin-top: 30px; text-align: center;">
+                    <button id="showFeedbackForm" style="background: #10b981; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold;">
+                        📋 直接在此提交反馈
+                    </button>
+                    <p style="font-size: 14px; color: #666; margin-top: 10px;">或使用上面的渠道</p>
+                </div>
+            </div>
+            
+            <!-- 内嵌反馈表单（默认隐藏） -->
+            <div id="embeddedFeedbackForm" style="display: none; margin-top: 30px; background: white; padding: 30px; border-radius: 15px; border: 2px solid #e5e7eb;">
+                <h3 style="color: #2563eb; margin-top: 0; margin-bottom: 20px;">📝 提交反馈</h3>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                    <button class="feedback-tab active" data-form="bug" style="padding: 8px 16px; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer;">🐛 报告问题</button>
+                    <button class="feedback-tab" data-form="feature" style="padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">💡 功能建议</button>
+                    <button class="feedback-tab" data-form="general" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer;">📝 一般反馈</button>
+                </div>
+                
+                <!-- 简化版Bug报告表单 -->
+                <div id="simpleBugForm" class="feedback-form-content" style="display: block;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">问题标题 *</label>
+                        <input type="text" id="simpleBugTitle" placeholder="简要描述问题" style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">问题描述 *</label>
+                        <textarea id="simpleBugDescription" placeholder="详细描述问题..." style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px; min-height: 100px;"></textarea>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">重现步骤</label>
+                        <textarea id="simpleBugSteps" placeholder="1. 第一步...&#10;2. 第二步..." style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px; min-height: 80px;"></textarea>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <div style="flex: 1;">
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">优先级</label>
+                            <select id="simpleBugPriority" style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px;">
+                                <option value="critical">严重</option>
+                                <option value="high">高</option>
+                                <option value="medium" selected>中</option>
+                                <option value="low">低</option>
+                            </select>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">环境</label>
+                            <select id="simpleBugEnvironment" style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px;">
+                                <option value="">选择环境</option>
+                                <option value="windows">Windows</option>
+                                <option value="macos">macOS</option>
+                                <option value="linux">Linux</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button id="submitBugFeedback" style="background: #2563eb; color: white; border: none; padding: 12px 40px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold;">
+                            提交问题报告
+                        </button>
+                        <button id="cancelFeedback" style="background: #6b7280; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 10px;">
+                            取消
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 简化版功能建议表单 -->
+                <div id="simpleFeatureForm" class="feedback-form-content" style="display: none;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">功能标题 *</label>
+                        <input type="text" id="simpleFeatureTitle" placeholder="建议的功能名称" style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">解决的问题 *</label>
+                        <textarea id="simpleFeatureProblem" placeholder="这个功能解决什么问题？" style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px; min-height: 100px;"></textarea>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">建议方案</label>
+                        <textarea id="simpleFeatureSolution" placeholder="您建议如何实现？" style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px; min-height: 80px;"></textarea>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button id="submitFeatureFeedback" style="background: #10b981; color: white; border: none; padding: 12px 40px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold;">
+                            提交功能建议
+                        </button>
+                        <button class="cancelFeedback" style="background: #6b7280; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 10px;">
+                            取消
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 简化版一般反馈表单 -->
+                <div id="simpleGeneralForm" class="feedback-form-content" style="display: none;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">反馈标题 *</label>
+                        <input type="text" id="simpleGeneralTitle" placeholder="反馈主题" style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">详细内容 *</label>
+                        <textarea id="simpleGeneralContent" placeholder="请详细描述您的反馈..." style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 6px; min-height: 120px;"></textarea>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">体验评分</label>
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="rating" value="5"> ⭐⭐⭐⭐⭐
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="rating" value="4"> ⭐⭐⭐⭐
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="rating" value="3" checked> ⭐⭐⭐
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="rating" value="2"> ⭐⭐
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="rating" value="1"> ⭐
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button id="submitGeneralFeedback" style="background: #f59e0b; color: white; border: none; padding: 12px 40px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold;">
+                            提交反馈
+                        </button>
+                        <button class="cancelFeedback" style="background: #6b7280; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 10px;">
+                            取消
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 提交成功消息 -->
+                <div id="feedbackSuccess" style="display: none; text-align: center; padding: 20px; background: #d1fae5; border-radius: 8px; margin-top: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 10px;">✅</div>
+                    <h4 style="color: #10b981; margin-bottom: 10px;">反馈提交成功！</h4>
+                    <p>感谢您的反馈。我们会在24小时内处理。</p>
+                    <p style="font-size: 14px; color: #666;">您也可以前往 <a href="https://github.com/zjc93zzy-del/github-automation-feedback/issues" style="color: #2563eb;">GitHub Issues</a> 查看进度。</p>
+                </div>
             </div>
         </div>
         
@@ -449,6 +594,165 @@
             setTimeout(() => {
                 this.textContent = originalText;
             }, 2000);
+        });
+        
+        // 反馈表单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const showFeedbackBtn = document.getElementById('showFeedbackForm');
+            const feedbackForm = document.getElementById('embeddedFeedbackForm');
+            const cancelBtns = document.querySelectorAll('.cancelFeedback, #cancelFeedback');
+            const feedbackTabs = document.querySelectorAll('.feedback-tab');
+            const formContents = document.querySelectorAll('.feedback-form-content');
+            
+            // 显示/隐藏反馈表单
+            if (showFeedbackBtn && feedbackForm) {
+                showFeedbackBtn.addEventListener('click', function() {
+                    feedbackForm.style.display = 'block';
+                    showFeedbackBtn.style.display = 'none';
+                });
+            }
+            
+            // 取消按钮
+            cancelBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    feedbackForm.style.display = 'none';
+                    if (showFeedbackBtn) {
+                        showFeedbackBtn.style.display = 'inline-block';
+                    }
+                });
+            });
+            
+            // 标签切换
+            feedbackTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const formType = this.getAttribute('data-form');
+                    
+                    // 更新激活标签
+                    feedbackTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 显示对应表单
+                    formContents.forEach(form => {
+                        form.style.display = 'none';
+                    });
+                    
+                    const formId = `simple${formType.charAt(0).toUpperCase() + formType.slice(1)}Form`;
+                    const targetForm = document.getElementById(formId);
+                    if (targetForm) {
+                        targetForm.style.display = 'block';
+                    }
+                });
+            });
+            
+            // 提交Bug反馈
+            const submitBugBtn = document.getElementById('submitBugFeedback');
+            if (submitBugBtn) {
+                submitBugBtn.addEventListener('click', function() {
+                    const title = document.getElementById('simpleBugTitle')?.value.trim() || '';
+                    const description = document.getElementById('simpleBugDescription')?.value.trim() || '';
+                    
+                    if (!title || !description) {
+                        alert('请填写问题标题和描述');
+                        return;
+                    }
+                    
+                    // 模拟提交成功
+                    formContents.forEach(form => form.style.display = 'none');
+                    const successMsg = document.getElementById('feedbackSuccess');
+                    if (successMsg) successMsg.style.display = 'block';
+                    
+                    console.log('Bug反馈提交:', { title, description });
+                    
+                    // 3秒后重置表单
+                    setTimeout(() => {
+                        if (feedbackForm) feedbackForm.style.display = 'none';
+                        if (showFeedbackBtn) showFeedbackBtn.style.display = 'inline-block';
+                        if (successMsg) successMsg.style.display = 'none';
+                        const bugForm = document.getElementById('simpleBugForm');
+                        if (bugForm) bugForm.style.display = 'block';
+                        
+                        // 清空表单
+                        const titleInput = document.getElementById('simpleBugTitle');
+                        const descInput = document.getElementById('simpleBugDescription');
+                        const stepsInput = document.getElementById('simpleBugSteps');
+                        if (titleInput) titleInput.value = '';
+                        if (descInput) descInput.value = '';
+                        if (stepsInput) stepsInput.value = '';
+                    }, 3000);
+                });
+            }
+            
+            // 提交功能建议
+            const submitFeatureBtn = document.getElementById('submitFeatureFeedback');
+            if (submitFeatureBtn) {
+                submitFeatureBtn.addEventListener('click', function() {
+                    const title = document.getElementById('simpleFeatureTitle')?.value.trim() || '';
+                    const problem = document.getElementById('simpleFeatureProblem')?.value.trim() || '';
+                    
+                    if (!title || !problem) {
+                        alert('请填写功能标题和解决的问题');
+                        return;
+                    }
+                    
+                    // 模拟提交成功
+                    formContents.forEach(form => form.style.display = 'none');
+                    const successMsg = document.getElementById('feedbackSuccess');
+                    if (successMsg) successMsg.style.display = 'block';
+                    
+                    console.log('功能建议提交:', { title, problem });
+                    
+                    setTimeout(() => {
+                        if (feedbackForm) feedbackForm.style.display = 'none';
+                        if (showFeedbackBtn) showFeedbackBtn.style.display = 'inline-block';
+                        if (successMsg) successMsg.style.display = 'none';
+                        const featureForm = document.getElementById('simpleFeatureForm');
+                        if (featureForm) featureForm.style.display = 'block';
+                        
+                        // 清空表单
+                        const titleInput = document.getElementById('simpleFeatureTitle');
+                        const problemInput = document.getElementById('simpleFeatureProblem');
+                        const solutionInput = document.getElementById('simpleFeatureSolution');
+                        if (titleInput) titleInput.value = '';
+                        if (problemInput) problemInput.value = '';
+                        if (solutionInput) solutionInput.value = '';
+                    }, 3000);
+                });
+            }
+            
+            // 提交一般反馈
+            const submitGeneralBtn = document.getElementById('submitGeneralFeedback');
+            if (submitGeneralBtn) {
+                submitGeneralBtn.addEventListener('click', function() {
+                    const title = document.getElementById('simpleGeneralTitle')?.value.trim() || '';
+                    const content = document.getElementById('simpleGeneralContent')?.value.trim() || '';
+                    
+                    if (!title || !content) {
+                        alert('请填写反馈标题和内容');
+                        return;
+                    }
+                    
+                    // 模拟提交成功
+                    formContents.forEach(form => form.style.display = 'none');
+                    const successMsg = document.getElementById('feedbackSuccess');
+                    if (successMsg) successMsg.style.display = 'block';
+                    
+                    console.log('一般反馈提交:', { title, content });
+                    
+                    setTimeout(() => {
+                        if (feedbackForm) feedbackForm.style.display = 'none';
+                        if (showFeedbackBtn) showFeedbackBtn.style.display = 'inline-block';
+                        if (successMsg) successMsg.style.display = 'none';
+                        const generalForm = document.getElementById('simpleGeneralForm');
+                        if (generalForm) generalForm.style.display = 'block';
+                        
+                        // 清空表单
+                        const titleInput = document.getElementById('simpleGeneralTitle');
+                        const contentInput = document.getElementById('simpleGeneralContent');
+                        if (titleInput) titleInput.value = '';
+                        if (contentInput) contentInput.value = '';
+                    }, 3000);
+                });
+            }
         });
     </script>
 </body>
