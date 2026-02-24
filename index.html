@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Automation Pro - Beta Testing</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #3b82f6;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .tagline {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .beta-badge {
+            display: inline-block;
+            background: var(--warning);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .features {
+            grid-column: 1 / -1;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 25px 0 15px;
+            font-size: 22px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .download-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 20px 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .platform-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .platform-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .platform-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .access-code {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 400px;
+            font-family: monospace;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .feedback-section {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .feedback-btn {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .platform-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🚀 GitHub Automation Pro</div>
+            <div class="tagline">Turn GitHub Activity into Automated Income</div>
+            <div class="beta-badge">BETA TESTING</div>
+            <p>Welcome to the beta testing program! Help us build the ultimate GitHub automation tool.</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2>🎯 What It Does</h2>
+                <p>GitHub Automation Pro helps developers find and capitalize on paid opportunities across GitHub:</p>
+                <ul style="margin: 20px 0 20px 20px;">
+                    <li>Automated issue monitoring</li>
+                    <li>Bounty and sponsorship detection</li>
+                    <li>Real-time notifications</li>
+                    <li>Monetization analytics</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>⏰ Beta Timeline</h2>
+                <p><strong>Duration:</strong> 14 days (Feb 24 - Mar 10, 2026)</p>
+                <p><strong>Access:</strong> Full premium features</p>
+                <p><strong>Special Offer:</strong> Lifetime 50% discount for active testers</p>
+                <p><strong>Support:</strong> Priority email and Discord support</p>
+            </div>
+        </div>
+        
+        <div class="card features">
+            <h2>✨ Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Smart Monitoring</h3>
+                    <p>Automatically tracks GitHub repositories for high-value issues with bounties, sponsorship tags, or paid work opportunities.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h3>Revenue Detection</h3>
+                    <p>Identifies monetization potential using AI analysis of issue content, labels, and repository funding information.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>Real-time Alerts</h3>
+                    <p>Instant Telegram notifications when new opportunities are found. Never miss a paid GitHub opportunity again.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Track your GitHub monetization progress with detailed reports, earnings projections, and opportunity analysis.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h2 style="color: white;">⬇️ Download Beta Version</h2>
+            <p style="opacity: 0.9; margin-bottom: 20px;">Choose your platform to download the beta installer:</p>
+            
+            <div class="platform-btns">
+                <a href="#windows" class="platform-btn">Windows (.exe)</a>
+                <a href="#macos" class="platform-btn">macOS (.dmg)</a>
+                <a href="#linux" class="platform-btn">Linux (.tar.gz)</a>
+                <a href="#docker" class="platform-btn">Docker Image</a>
+            </div>
+            
+            <div style="margin: 30px 0;">
+                <p style="margin-bottom: 10px;">Your Beta Access Code:</p>
+                <div class="access-code">BETA2026</div>
+                <p style="font-size: 14px; opacity: 0.8;">Required for installation and activation</p>
+            </div>
+            
+            <a href="#quickstart" class="download-btn">Get Started Guide →</a>
+        </div>
+        
+        <div class="instructions" id="quickstart">
+            <h2>🚀 Quick Start Guide</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <h3>Download & Install</h3>
+                    <p>Download the installer for your operating system and run it. The installation wizard will guide you through the process.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <h3>Configure GitHub Access</h3>
+                    <p>Enter your GitHub Personal Access Token with 'repo' scope. This allows the tool to monitor repositories on your behalf.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <h3>Set Up Telegram Notifications</h3>
+                    <p>Connect your Telegram account to receive real-time alerts about new opportunities (optional but recommended).</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>
+                    <h3>Start Monitoring</h3>
+                    <p>Add repositories to monitor and configure your preferences. The system will start scanning immediately.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">5</div>
+                <div>
+                    <h3>Provide Feedback</h3>
+                    <p>Use the feedback form to report bugs, suggest features, or share your experience. Your input shapes the final product.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feedback-section">
+            <h2>💬 Your Feedback Matters</h2>
+            <p>As a beta tester, your experience and suggestions are crucial for building a better product.</p>
+            
+            <a href="#feedback" class="feedback-btn">Submit Feedback →</a>
+            
+            <div style="margin-top: 30px;">
+                <p><strong>Feedback Channels:</strong></p>
+                <p>Email: beta-feedback@jet-automation.dev</p>
+                <p>GitHub Issues: github.com/jet-automation/feedback</p>
+                <p>Discord: discord.gg/jet-automation</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2026 Jet Automation Studio. All rights reserved.</p>
+            <p>Beta Version 1.0.0 | Test Period: Feb 24 - Mar 10, 2026</p>
+            <p>Confidential - For Beta Testers Only</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simple download simulation
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.textContent;
+                alert(`Thank you! The ${platform} beta download will be available soon.\n\nFor now, please use the installation instructions below.`);
+            });
+        });
+        
+        // Access code copy
+        const accessCode = document.querySelector('.access-code');
+        accessCode.addEventListener('click', function() {
+            navigator.clipboard.writeText('BETA2026');
+            const originalText = this.textContent;
+            this.textContent = 'Copied!';
+            setTimeout(() => {
+                this.textContent = originalText;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
